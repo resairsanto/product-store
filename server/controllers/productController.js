@@ -20,6 +20,17 @@ class ProductController {
          next(error)
       }
    }
+
+   static async editProduct(req, res, next) {
+      try {
+         const { id } = req.params
+         const { image, name, buyPrice, sellPrice, stock } = req.body
+         await Product.update({ image, name, buyPrice, sellPrice, stock }, { where: { id } })
+         res.status(201).json({ message: "Product successfully updated" })
+      } catch (error) {
+         next(error)
+      }
+   }
 }
 
 module.exports = ProductController

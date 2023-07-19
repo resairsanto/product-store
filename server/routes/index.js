@@ -9,6 +9,7 @@ router
    .post("/user/login", UserController.login)
    .post("/product/add", authentication, ProductController.createProduct)
    .get("/product/:id", authentication, ProductController.findProduct)
+   .put("/product/:id", authentication, ProductController.editProduct)
    .use(errorHandler)
 
 module.exports = router
