@@ -10,6 +10,7 @@ router
    .post("/product/add", authentication, ProductController.createProduct)
    .get("/product/:id", authentication, ProductController.findProduct)
    .put("/product/:id", authentication, ProductController.editProduct)
+   .delete("/product/:id", authentication, ProductController.deleteProduct)
    .use(errorHandler)
 
 module.exports = router
