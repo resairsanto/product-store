@@ -4,21 +4,73 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
     }
   }
   Product.init({
-    image: DataTypes.STRING,
-    name: DataTypes.STRING,
-    buyPrice: DataTypes.INTEGER,
-    sellPrice: DataTypes.INTEGER,
-    stock: DataTypes.INTEGER
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Image is required."
+        },
+        notEmpty: {
+          msg: "Image is required."
+        }
+      }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        msg: "Name must be unique."
+      },
+      validate: {
+        notNull: {
+          msg: "Name is required."
+        },
+        notEmpty: {
+          msg: "Name is required."
+        }
+      }
+    },
+    buyPrice: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Buy price is required."
+        },
+        notEmpty: {
+          msg: "Buy price is required."
+        }
+      }
+    },
+    sellPrice: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Sell price is required."
+        },
+        notEmpty: {
+          msg: "Sell price is required."
+        }
+      }
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Stock is required."
+        },
+        notEmpty: {
+          msg: "Stock is required."
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Product',
