@@ -1,4 +1,5 @@
-const { Product } = require("../models")
+const { Product } = require("../models");
+const { Op } = require("sequelize");
 
 class ProductController {
    static async createProduct(req, res, next) {
@@ -40,6 +41,32 @@ class ProductController {
          res.status(201).json({ message: "Product successfully deleted" })
       } catch (error) {
          next(error)
+      }
+   }
+
+   static async listProduct(req, res, next) {
+      const { page, search } = req.query
+      let querySQL = {
+         where: {}
+      }
+      let offset;
+      let limit;
+      if (page !== '' && typeof page !== "undefined") {
+         limit = 5
+         offset = (page - 1) * limit
+         querySQL.offset = offset
+         querySQL.limit = limit
+      }
+      if (search !== '' && typeof search !== "undefined") {
+         querySQL.where.name = {
+            [Op.iLike]: `%${search}%`
+         }
+      }
+      try {
+         let Products = await Product.findAndCountAll(querySQL);
+         res.status(200).json(Products);
+      } catch (error) {
+         next(error);
       }
    }
 }
