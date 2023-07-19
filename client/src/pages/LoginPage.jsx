@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useState } from "react"
 
 function LoginPage() {
@@ -30,10 +31,10 @@ function LoginPage() {
                         <label htmlFor="exampleInputPassword1" className="form-label custom-font">Password</label>
                         <input type="password" className="form-control" id="exampleInputPassword1" name="password" placeholder="******" onChange={handleChange} />
                      </div>
-                     <button type="submit" className="form-control btn btn-primary mb-3">Submit</button>
+                     <button type="submit" className="form-control btn btn-primary mb-3">Sign In</button>
                   </form>
                   <div className="text-center mb-3">
-                     Not a member? Register
+                     Not a member? <Link to="/register" style={{ textDecoration: 'none' }}>Register</Link>
                   </div>
                </div>
             </div>

@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import LoginPage from './pages/LoginPage'
-// import './App.css'
+import SidebarItem from "./components/SidebarItem"
+import NavbarItem from "./components/NavbarItem"
+import ProductTable from "./components/ProductTable"
 
 function App() {
 
   return (
     <>
-      <LoginPage />
+      <NavbarItem />
+      <ProductTable />
     </>
   )
 }
