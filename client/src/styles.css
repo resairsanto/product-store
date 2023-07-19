@@ -1,0 +1,7 @@
+.top-margin {
+   margin-top: 7rem;
+}
+
+::placeholder {
+   opacity: 0.5 !important;
+ }
