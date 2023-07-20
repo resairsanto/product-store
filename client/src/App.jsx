@@ -1,4 +1,3 @@
-import SidebarItem from "./components/SidebarItem"
 import NavbarItem from "./components/NavbarItem"
 import ProductTable from "./components/ProductTable"
 

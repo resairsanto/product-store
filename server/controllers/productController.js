@@ -4,7 +4,8 @@ const { Op } = require("sequelize");
 class ProductController {
    static async createProduct(req, res, next) {
       try {
-         const { image, name, buyPrice, sellPrice, stock } = req.body
+         console.log(req.body)
+         const { image, name, purchasePrice: buyPrice, sellPrice, stock } = req.body
          await Product.create({ image, name, buyPrice, sellPrice, stock })
          res.status(201).json({ message: "Product created" })
       } catch (error) {
@@ -67,6 +68,15 @@ class ProductController {
          res.status(200).json(Products);
       } catch (error) {
          next(error);
+      }
+   }
+
+   static async imageUpload(req, res, next) {
+      try {
+         const { path } = req.file
+         res.status(201).json(path)
+      } catch (error) {
+         next(error)
       }
    }
 }

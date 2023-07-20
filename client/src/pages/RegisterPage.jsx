@@ -1,7 +1,11 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { submitRegister } from "../store/actions/actionCreator"
 
 function RegisterPage() {
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
    const [form, setForm] = useState({
       email: '',
       password: ''
@@ -14,6 +18,16 @@ function RegisterPage() {
       })
    }
 
+   async function handleRegister(e) {
+      e.preventDefault()
+      await dispatch(submitRegister(form))
+      setForm({
+         email: '',
+         password: ''
+      })
+      navigate("/login")
+   }
+
    return (
       <>
          <div className="container top-margin">
@@ -22,14 +36,14 @@ function RegisterPage() {
                   <div className="text-center custom-font mt-4">
                      <h3>SIGN <span className="text-primary">UP</span></h3>
                   </div>
-                  <form>
+                  <form onSubmit={handleRegister}>
                      <div className="mb-3">
                         <label htmlFor="exampleInputEmail1" className="form-label custom-font" >Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@mail.com" name="email" onChange={handleChange} />
+                        <input type="email" className="form-control" value={form.email} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@mail.com" name="email" onChange={handleChange} />
                      </div>
                      <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label custom-font">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" name="password" placeholder="******" onChange={handleChange} />
+                        <input type="password" className="form-control" value={form.password} id="exampleInputPassword1" name="password" placeholder="******" onChange={handleChange} />
                      </div>
                      <button type="submit" className="form-control btn btn-primary mb-3">Sign Up</button>
                   </form>
